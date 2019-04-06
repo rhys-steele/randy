@@ -12,11 +12,11 @@ dc = 95 # duty cycle (0-100) for PWM pin
 # Pin Setup:
 GPIO.setmode(GPIO.BCM) # Broadcom pin-numbering scheme
 
-GPIO.setup(inA1, GPIO.OUT) # LED pin set as output
-GPIO.setup(inA2, GPIO.OUT) # LED pin set as output
+GPIO.setup(inA1, GPIO.OUT) # inA1 pin set as output
+GPIO.setup(inA2, GPIO.OUT) # inA2 pin set as output
 GPIO.setup(enA, GPIO.OUT) # PWM pin set as output
 
-pwm = GPIO.PWM(pwmPin, 50)  # Initialize PWM on pwmPin 100Hz frequency
+pwm = GPIO.PWM(enA, 50)  # Initialize PWM on enA 100Hz frequency
 
 # Initial state for LEDs:
 GPIO.output(inA1, GPIO.LOW)
