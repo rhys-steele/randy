@@ -3,9 +3,9 @@ import RPi.GPIO as GPIO
 import time
 
 # Pin Definitons:
-enA = 13 # Broadcom pin 13 (P1 pin 33)
-inA1 = 19 # Broadcom pin 23 (P1 pin 35)
-inA2 = 26 # Broadcom pin 17 (P1 pin 37)
+enA = 18 # Broadcom pin 13 (P1 pin 33)
+inA1 = 23 # Broadcom pin 19 (P1 pin 35)
+inA2 = 17 # Broadcom pin 26 (P1 pin 37)
 
 dc = 95 # duty cycle (0-100) for PWM pin
 
@@ -23,7 +23,7 @@ count = 0 # Initialize count
 # Initial state for LEDs:
 GPIO.output(inA1, GPIO.LOW)
 GPIO.output(inA2, GPIO.HIGH)
-GPIO.output(inA2, GPIO.HIGH)
+GPIO.output(enA, GPIO.HIGH)
 # pwm.start(dc)
 
 print("Here we go! Press CTRL+C to exit")
@@ -32,6 +32,8 @@ try:
         count += 1
         time.sleep(1)
         print 10 - count
+
+GPIO.cleanup() # cleanup all GPIO
 
 except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
     pwm.stop() # stop PWM
