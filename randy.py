@@ -34,7 +34,7 @@ pwmB = GPIO.PWM(enB, 100)  # Initialize PWM on enA 100Hz frequency
 
 count = 0 # Initialize count
 
-# Initial state for Motors:
+# Initial state for Motors (LF, RF):
 GPIO.output(inA1, GPIO.LOW)
 GPIO.output(inA2, GPIO.HIGH)
 
@@ -46,7 +46,7 @@ pwmB.start(dc)
 
 print("Here we go! Press CTRL+C to exit")
 try:
-    while count < 10:
+    while 1:
         count += 1
         time.sleep(1)
         print 10 - count
