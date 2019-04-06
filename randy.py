@@ -10,9 +10,9 @@ inA1 = 23 # Broadcom pin 19 (P1 pin 35)
 inA2 = 17 # Broadcom pin 26 (P1 pin 37)
 
 # Motor 2 - Right
-enB = 24 # Broadcom pin 13 (P1 pin 33)
-inB1 = 27 # Broadcom pin 19 (P1 pin 35)
-inB2 = 22 # Broadcom pin 26 (P1 pin 37)
+enB = 22 # Broadcom pin 13 (P1 pin 33)
+inB1 = 24 # Broadcom pin 19 (P1 pin 35)
+inB2 = 27 # Broadcom pin 26 (P1 pin 37)
 
 dc = 100 # duty cycle (0-100) for PWM pin
 
