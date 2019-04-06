@@ -25,7 +25,10 @@ pwm.start(dc)
 
 print("Here we go! Press CTRL+C to exit")
 try:
-    while 1:
+    while count < 10:
+        count += 1
+        sleep(1)
+        print 10 - count
 
 except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
     pwm.stop() # stop PWM
