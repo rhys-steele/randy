@@ -33,8 +33,8 @@ try:
         time.sleep(1)
         print 10 - count
 
-GPIO.cleanup() # cleanup all GPIO
-
 except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
     pwm.stop() # stop PWM
     GPIO.cleanup() # cleanup all GPIO
+
+GPIO.cleanup() # cleanup all GPIO
