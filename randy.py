@@ -38,8 +38,8 @@ count = 0 # Initialize count
 GPIO.output(inA1, GPIO.LOW)
 GPIO.output(inA2, GPIO.HIGH)
 
-GPIO.output(inB1, GPIO.LOW)
-GPIO.output(inB2, GPIO.HIGH)
+GPIO.output(inB1, GPIO.HIGH)
+GPIO.output(inB2, GPIO.LOW)
 
 pwmA.start(dc)
 pwmB.start(dc)
@@ -47,9 +47,7 @@ pwmB.start(dc)
 print("Here we go! Press CTRL+C to exit")
 try:
     while 1:
-        count += 1
         time.sleep(1)
-        print 10 - count
 
 except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
     pwmA.stop() # stop PWM
