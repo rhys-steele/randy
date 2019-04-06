@@ -52,8 +52,10 @@ try:
         print 10 - count
 
 except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
-    pwm.stop() # stop PWM
+    pwmA.stop() # stop PWM
+    pwmB.stop() # stop PWM
     GPIO.cleanup() # cleanup all GPIO
 
-pwm.stop() # stop PWM
+pwmA.stop() # stop PWM
+pwmB.stop() # stop PWM
 GPIO.cleanup() # cleanup all GPIO
