@@ -20,7 +20,7 @@ pwm = GPIO.PWM(enA, 50)  # Initialize PWM on enA 100Hz frequency
 
 # Initial state for LEDs:
 GPIO.output(inA1, GPIO.LOW)
-GPIO.output(inA2, GPIO.HOW)
+GPIO.output(inA2, GPIO.HIGH)
 pwm.start(dc)
 
 print("Here we go! Press CTRL+C to exit")
