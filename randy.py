@@ -7,7 +7,7 @@ enA = 18 # Broadcom pin 13 (P1 pin 33)
 inA1 = 23 # Broadcom pin 19 (P1 pin 35)
 inA2 = 17 # Broadcom pin 26 (P1 pin 37)
 
-dc = 5 # duty cycle (0-100) for PWM pin
+dc = 100 # duty cycle (0-100) for PWM pin
 
 # Pin Setup:
 GPIO.setmode(GPIO.BCM) # Broadcom pin-numbering scheme
@@ -16,7 +16,7 @@ GPIO.setup(inA1, GPIO.OUT) # inA1 pin set as output
 GPIO.setup(inA2, GPIO.OUT) # inA2 pin set as output
 GPIO.setup(enA, GPIO.OUT) # PWM pin set as output
 
-pwm = GPIO.PWM(enA, 50)  # Initialize PWM on enA 100Hz frequency
+pwm = GPIO.PWM(enA, 100)  # Initialize PWM on enA 100Hz frequency
 
 count = 0 # Initialize count
 
