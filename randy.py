@@ -29,7 +29,7 @@ print("Here we go! Press CTRL+C to exit")
 try:
     while count < 10:
         count += 1
-        sleep(1)
+        time.sleep(1)
         print 10 - count
 
 except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
