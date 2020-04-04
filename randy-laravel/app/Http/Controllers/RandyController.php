@@ -54,7 +54,7 @@ class RandyController extends Controller
             'pin' => config('randy.motorA.en'),
             'value' => 0,
         ]);
-        Artisan::call('pin:mode', [
+        Artisan::call('pin:value', [
             'mode' => 'pwm',
             'pin' => config('randy.motorB.en'),
             'value' => 0
@@ -77,7 +77,7 @@ class RandyController extends Controller
                 'pin' => config('randy.motorA.in1'),
                 'value' => 0,
             ]);
-            Artisan::call('pin:mode', [
+            Artisan::call('pin:value', [
                 'mode' => 'digital',
                 'pin' => config('randy.motorA.in2'),
                 'value' => 1
@@ -87,7 +87,7 @@ class RandyController extends Controller
                 'pin' => config('randy.motorB.in1'),
                 'value' => 1,
             ]);
-            Artisan::call('pin:mode', [
+            Artisan::call('pin:value', [
                 'mode' => 'digital',
                 'pin' => config('randy.motorB.in2'),
                 'value' => 0
@@ -98,7 +98,7 @@ class RandyController extends Controller
                 'pin' => config('randy.motorA.in1'),
                 'value' => 1,
             ]);
-            Artisan::call('pin:mode', [
+            Artisan::call('pin:value', [
                 'mode' => 'digital',
                 'pin' => config('randy.motorA.in2'),
                 'value' => 0
@@ -108,7 +108,7 @@ class RandyController extends Controller
                 'pin' => config('randy.motorB.in1'),
                 'value' => 0,
             ]);
-            Artisan::call('pin:mode', [
+            Artisan::call('pin:value', [
                 'mode' => 'digital',
                 'pin' => config('randy.motorB.in2'),
                 'value' => 1
@@ -121,7 +121,7 @@ class RandyController extends Controller
             'pin' => config('randy.motorA.en'),
             'value' => $speedPWM
         ]);
-        Artisan::call('pin:mode', [
+        Artisan::call('pin:value', [
             'mode' => 'pwm',
             'pin' => config('randy.motorB.en'),
             'value' => $speedPWM
