@@ -4,7 +4,8 @@ var app = new Vue({
         started: false,
         robot: {
             state: 'stopped',
-            direction: 100,
+            direction: 'forward',
+            turning: 100,
             speed: 50
         },
         logs: []
@@ -20,8 +21,12 @@ var app = new Vue({
             this.robot.state = 'stopped';
             this.update();
         },
+        toggleDirection: function() {
+            this.robot.direction = this.robot.direction == 'forward' ? 'backward' : 'forward';
+            this.update();
+        },
         reset: function() {
-            this.robot.direction = 100;
+            this.robot.turning = 100;
             this.robot.speed = 50;
         },
         update: function() {
@@ -30,6 +35,7 @@ var app = new Vue({
             axios.post('/api/execute', {
                 state: this.robot.state,
                 speed: this.robot.speed,
+                turning: this.robot.turning,
                 direction: this.robot.direction
             })
             .then(function (response) {
@@ -53,7 +59,7 @@ var app = new Vue({
         },
         log: function(message) {
             this.logs.push('[' + moment().format() + '] - ' + message);
-            if (this.logs.length > 8) {
+            if (this.logs.length > 4) {
                 this.logs.splice(0, 1);
             }
         }

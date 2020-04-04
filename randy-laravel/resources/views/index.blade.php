@@ -9,6 +9,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
         <link href="css/randy.css" rel="stylesheet">
 
     </head>
@@ -17,7 +18,7 @@
             <div class="content" id="app">
                 <div class="card text-center sub-title m-b-md">
                     <div class="card-header">
-                        Randy
+                        Robot
                     </div>
                     <div class="card-body">
                         <div v-if="!started">
@@ -27,13 +28,20 @@
                         </div>
                         <div v-if="started">
                             <form>
+                                <div class="big-icon text-success" v-on:click="toggleDirection" v-show="robot.direction == 'forward'">
+                                    <i class="fas fa-angle-double-up"></i>
+                                    {{--  <i class="fas fa-angle-double-down" v-show="robot.direction == 'backward'"></i>  --}}
+                                </div>
+                                <div class="big-icon text-success" v-on:click="toggleDirection" v-show="robot.direction == 'backward'">
+                                    <i class="fas fa-angle-double-down"></i>
+                                </div>
                                 <div class="form-group">
                                     <label for="direction-input">
-                                        Direction: 
-                                        @{{ robot.direction < 100 ? 'Left' : 'Right' }}
-                                        @{{ robot.direction < 100 ? 100 - robot.direction : robot.direction - 100 }}%
+                                        Turning: 
+                                        @{{ robot.turning < 100 ? 'Left' : 'Right' }}
+                                        @{{ robot.turning < 100 ? 100 - robot.turning : robot.turning - 100 }}%
                                     </label>
-                                    <input type="range" class="form-control-range range-input" max="200" value="100" id="direction-input" v-on:change="update" v-model="robot.direction">
+                                    <input type="range" class="form-control-range range-input" max="200" value="100" id="direction-input" v-on:change="update" v-model="robot.turning">
                                 </div>
                                 <div class="form-group">
                                     <label for="speed-input">Speed: @{{ robot.speed }}%</label>
@@ -66,5 +74,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
     <script src="js/randy.js"></script>
 </html>
