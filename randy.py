@@ -57,13 +57,3 @@ else:
 
 pwmA.start(int(leftSpeed))
 pwmB.start(int(rightSpeed))
-
-try:
-    while 1:
-        time.sleep(1)
-
-
-except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:	# except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
-    pwmA.stop() # stop PWM	#     pwmA.stop() # stop PWM
-    pwmB.stop() # stop PWM	#     pwmB.stop() # stop PWM
-    GPIO.cleanup() # cleanup all GPIO
