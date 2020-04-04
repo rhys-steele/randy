@@ -39,7 +39,10 @@ class SetPinMode extends Command
     {
         $pin = $this->argument('pin');
         $mode = $this->argument('mode');
-        $this->info('Setting pin ' . $pin . ' to ' . $mode);
+        $this->info(shell_exec('gpio readall'));
+        $this->info('Pin ' . $pin . ' set to ' . $mode);
+        $this->info('');
+        shell_exec('gpio mode ' . $pin . ' ' . $mode);
         $this->info(shell_exec('gpio readall'));
     }
 }
