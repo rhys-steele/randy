@@ -2,14 +2,12 @@
 
 import sys
 
-print 'Number of arguments:', len(sys.argv), 'arguments.'
-
 direction = sys.argv[1]
 leftSpeed = sys.argv[2]
 rightSpeed = sys.argv[2]
 
 # External module imports
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import time
 
 # Pin Definitons:
@@ -24,21 +22,23 @@ enB = 27 # Broadcom pin 13 (P1 pin 33)
 inB1 = 5 # Broadcom pin 19 (P1 pin 35)
 inB2 = 6 # Broadcom pin 26 (P1 pin 37)
 
-# Pin Setup:
-GPIO.setmode(GPIO.BCM) # Broadcom pin-numbering scheme
+# # Pin Setup:
+# GPIO.setmode(GPIO.BCM)
 
-# Motor 1
-GPIO.setup(inA1, GPIO.OUT) # inA1 pin set as output
-GPIO.setup(inA2, GPIO.OUT) # inA2 pin set as output
-GPIO.setup(enA, GPIO.OUT) # PWM pin set as output
+# # Motor 1
+# GPIO.setup(inA1, GPIO.OUT) # inA1 pin set as output
+# GPIO.setup(inA2, GPIO.OUT) # inA2 pin set as output
+# GPIO.setup(enA, GPIO.OUT) # PWM pin set as output
 
-# Motor 2
-GPIO.setup(inB1, GPIO.OUT) # inB1 pin set as output
-GPIO.setup(inB2, GPIO.OUT) # inB2 pin set as output
-GPIO.setup(enB, GPIO.OUT) # PWM pin set as output
+# # Motor 2
+# GPIO.setup(inB1, GPIO.OUT) # inB1 pin set as output
+# GPIO.setup(inB2, GPIO.OUT) # inB2 pin set as output
+# GPIO.setup(enB, GPIO.OUT) # PWM pin set as output
 
-pwmA = GPIO.PWM(enA, 100)  # Initialize PWM on enA 100Hz frequency
-pwmB = GPIO.PWM(enB, 100)  # Initialize PWM on enA 100Hz frequency
+# pwmA = GPIO.PWM(enA, 100)  # Initialize PWM on enA 100Hz frequency
+# pwmB = GPIO.PWM(enB, 100)  # Initialize PWM on enA 100Hz frequency
+
+# count = 0 # Initialize count
 
 # Initial state for Motors (LF, RF):
 if (direction == 'forward'):
