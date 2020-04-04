@@ -11,7 +11,7 @@ class SetPinValue extends Command
      *
      * @var string
      */
-    protected $signature = 'pin:value {pin} {value} {--pwm}';
+    protected $signature = 'pin:value {mode} {pin} {value}';
 
     /**
      * The console command description.
