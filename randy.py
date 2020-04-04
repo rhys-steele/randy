@@ -4,7 +4,7 @@ import sys
 
 direction = sys.argv[1]
 leftSpeed = sys.argv[2]
-rightSpeed = sys.argv[2]
+rightSpeed = sys.argv[3]
 
 # External module imports
 import RPi.GPIO as GPIO
