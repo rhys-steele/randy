@@ -5,12 +5,11 @@ import sys
 direction = sys.argv[1]
 leftSpeed = sys.argv[2]
 rightSpeed = sys.argv[3]
+rightHandicap = sys.argv[4]
 
 # External module imports
 import RPi.GPIO as GPIO
 import time
-
-# Pin Definitons:
 
 # Motor 1 - Left
 enA = 26 # Broadcom pin 13 (P1 pin 33)
@@ -52,7 +51,7 @@ else:
     GPIO.output(inB1, GPIO.LOW)
     GPIO.output(inB2, GPIO.HIGH)
 
-pwmA.start(leftSpeed * float(80) / 100)
+pwmA.start(int(leftSpeed * float(rightHandicap) / 100))
 pwmB.start(int(rightSpeed))
 
 try:
