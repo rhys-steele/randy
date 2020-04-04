@@ -34,7 +34,7 @@ return [
      */
     'pins' => [
         'test' => [
-            'pin' => 16,
+            'pin' => 36,
             'mode' => 'pwm',
         ],
     ],
