@@ -51,7 +51,7 @@ else:
     GPIO.output(inB1, GPIO.LOW)
     GPIO.output(inB2, GPIO.HIGH)
 
-pwmA.start(int(leftSpeed * float(rightHandicap) / 100))
+pwmA.start(int(int(leftSpeed) * float(rightHandicap) / 100))
 pwmB.start(int(rightSpeed))
 
 try:
