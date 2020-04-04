@@ -4,7 +4,7 @@ import sys
 
 direction = sys.argv[1]
 leftSpeed = sys.argv[2]
-rightSpeed = sys.argv[3]
+rightSpeed = sys.argv[2]
 
 # External module imports
 import RPi.GPIO as GPIO
@@ -24,8 +24,6 @@ inB2 = 6 # Broadcom pin 26 (P1 pin 37)
 
 # Pin Setup:
 GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.cleanup()
 
 # Motor 1
 GPIO.setup(inA1, GPIO.OUT) # inA1 pin set as output
@@ -56,3 +54,13 @@ else:
 
 pwmA.start(int(leftSpeed))
 pwmB.start(int(rightSpeed))
+
+try:
+    while 1:
+        time.sleep(1)
+
+
+except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:	# except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
+    pwmA.stop() # stop PWM	#     pwmA.stop() # stop PWM
+    pwmB.stop() # stop PWM	#     pwmB.stop() # stop PWM
+    GPIO.cleanup() # cleanup all GPIO
