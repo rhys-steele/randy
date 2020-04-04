@@ -4,21 +4,21 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class SetPinMode extends Command
+class SetPinValue extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'pin:mode {pin} {mode}';
+    protected $signature = 'pin:value {mode} {pin} {value}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Set the mode for the given pin';
+    protected $description = 'Set the value for the given pin';
 
     /**
      * Create a new command instance.
@@ -37,11 +37,17 @@ class SetPinMode extends Command
      */
     public function handle()
     {
+        // @todo validation
         $pin = $this->argument('pin');
         $mode = $this->argument('mode');
-        $this->info('Pin ' . $pin . ' set to ' . $mode);
+        $value = $this->argument('value');
+        if ($mode == 'pwm') {
+            shell_exec('gpio pwm ' . $pin . ' ' . $value);
+        } else {
+            shell_exec('gpio write ' . $pin . ' ' . $value);
+        }
+        $this->info('Pin ' . $pin . ' set to ' . $value . ' using ' . $mode);
         $this->info('');
-        shell_exec('gpio mode ' . $pin . ' ' . $mode);
         $this->info(shell_exec('gpio readall'));
     }
 }
