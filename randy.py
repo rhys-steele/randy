@@ -1,3 +1,13 @@
+#!/usr/bin/python
+
+import sys
+
+print 'Number of arguments:', len(sys.argv), 'arguments.'
+
+direction = sys.argv[1]
+leftSpeed = sys.argv[2]
+rightSpeed = sys.argv[2]
+
 # External module imports
 import RPi.GPIO as GPIO
 import time
@@ -5,16 +15,14 @@ import time
 # Pin Definitons:
 
 # Motor 1 - Left
-enA = 18 # Broadcom pin 13 (P1 pin 33)
-inA1 = 23 # Broadcom pin 19 (P1 pin 35)
-inA2 = 17 # Broadcom pin 26 (P1 pin 37)
+enA = 26 # Broadcom pin 13 (P1 pin 33)
+inA1 = 17 # Broadcom pin 19 (P1 pin 35)
+inA2 = 22 # Broadcom pin 26 (P1 pin 37)
 
 # Motor 2 - Right
-enB = 24 # Broadcom pin 13 (P1 pin 33)
-inB1 = 22 # Broadcom pin 19 (P1 pin 35)
-inB2 = 27 # Broadcom pin 26 (P1 pin 37)
-
-dc = 100 # duty cycle (0-100) for PWM pin
+enB = 27 # Broadcom pin 13 (P1 pin 33)
+inB1 = 5 # Broadcom pin 19 (P1 pin 35)
+inB2 = 6 # Broadcom pin 26 (P1 pin 37)
 
 # Pin Setup:
 GPIO.setmode(GPIO.BCM) # Broadcom pin-numbering scheme
@@ -32,28 +40,17 @@ GPIO.setup(enB, GPIO.OUT) # PWM pin set as output
 pwmA = GPIO.PWM(enA, 100)  # Initialize PWM on enA 100Hz frequency
 pwmB = GPIO.PWM(enB, 100)  # Initialize PWM on enA 100Hz frequency
 
-count = 0 # Initialize count
-
 # Initial state for Motors (LF, RF):
-GPIO.output(inA1, GPIO.LOW)
-GPIO.output(inA2, GPIO.HIGH)
+if (direction == 'forward'):
+    GPIO.output(inA1, GPIO.LOW)
+    GPIO.output(inA2, GPIO.HIGH)
+    GPIO.output(inB1, GPIO.HIGH)
+    GPIO.output(inB2, GPIO.LOW)
+else:
+    GPIO.output(inA1, GPIO.HIGH)
+    GPIO.output(inA2, GPIO.LOW)
+    GPIO.output(inB1, GPIO.LOW)
+    GPIO.output(inB2, GPIO.HIGH)
 
-GPIO.output(inB1, GPIO.HIGH)
-GPIO.output(inB2, GPIO.LOW)
-
-pwmA.start(dc)
-pwmB.start(dc)
-
-print("Here we go! Press CTRL+C to exit")
-try:
-    while 1:
-        time.sleep(1)
-
-except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
-    pwmA.stop() # stop PWM
-    pwmB.stop() # stop PWM
-    GPIO.cleanup() # cleanup all GPIO
-
-pwmA.stop() # stop PWM
-pwmB.stop() # stop PWM
-GPIO.cleanup() # cleanup all GPIO
+pwmA.start(int(leftSpeed))
+pwmB.start(int(rightSpeed))
