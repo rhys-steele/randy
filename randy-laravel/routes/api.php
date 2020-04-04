@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/execute', 'RandyController@execute');
+Route::post('/setup', 'RandyController@setup');

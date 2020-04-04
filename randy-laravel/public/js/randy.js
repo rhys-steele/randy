@@ -1,6 +1,7 @@
 var app = new Vue({
     el: '#app',
     data: {
+        started: false,
         robot: {
             state: 'stopped',
             direction: 100,
@@ -36,6 +37,18 @@ var app = new Vue({
             })
             .catch(function (error) {
                 self.log('Command failed to send')
+            });
+        },
+        setup: function() {
+            var self = this;
+            self.log('Sending setup commands...');
+            axios.post('/api/setup')
+            .then(function (response) {
+                self.log('Setup successful');
+                self.started = true;
+            })
+            .catch(function (error) {
+                self.log('Error during successful');
             });
         },
         log: function(message) {

@@ -20,24 +20,31 @@
                         Randy
                     </div>
                     <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="direction-input">
-                                    Direction: 
-                                    @{{ robot.direction < 100 ? 'Left' : 'Right' }}
-                                    @{{ robot.direction < 100 ? 100 - robot.direction : robot.direction - 100 }}%
-                                </label>
-                                <input type="range" class="form-control-range range-input" max="200" value="100" id="direction-input" v-on:change="update" v-model="robot.direction">
-                            </div>
-                            <div class="form-group">
-                                <label for="speed-input">Speed: @{{ robot.speed }}%</label>
-                                <input type="range" class="form-control-range range-input" id="speed-input" v-on:change="update" v-model="robot.speed">
-                            </div>
-                            <button type="button" class="btn btn-success btn-lg btn-block" v-show="robot.state == 'stopped'" v-on:click="go">Go</button>
-                            <button type="button" class="btn btn-danger btn-lg btn-block" v-show="robot.state == 'running'" v-on:click="stop">Stop</button>
-                            <button type="button" class="btn btn-warning btn-lg btn-block" v-on:click="reset">Reset</button>
-                            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Logs</button>
-                        </form>
+                        <div v-if="!started">
+                            <form>
+                                <button type="button" class="btn btn-success btn-lg btn-block" v-on:click="setup">Setup</button>
+                            </form>
+                        </div>
+                        <div v-if="started">
+                            <form>
+                                <div class="form-group">
+                                    <label for="direction-input">
+                                        Direction: 
+                                        @{{ robot.direction < 100 ? 'Left' : 'Right' }}
+                                        @{{ robot.direction < 100 ? 100 - robot.direction : robot.direction - 100 }}%
+                                    </label>
+                                    <input type="range" class="form-control-range range-input" max="200" value="100" id="direction-input" v-on:change="update" v-model="robot.direction">
+                                </div>
+                                <div class="form-group">
+                                    <label for="speed-input">Speed: @{{ robot.speed }}%</label>
+                                    <input type="range" class="form-control-range range-input" id="speed-input" v-on:change="update" v-model="robot.speed">
+                                </div>
+                                <button type="button" class="btn btn-success btn-lg btn-block" v-show="robot.state == 'stopped'" v-on:click="go">Go</button>
+                                <button type="button" class="btn btn-danger btn-lg btn-block" v-show="robot.state == 'running'" v-on:click="stop">Stop</button>
+                                <button type="button" class="btn btn-warning btn-lg btn-block" v-on:click="reset">Reset</button>
+                                <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Logs</button>
+                            </form>
+                        </div>
                     </div>
                     <div class="card-footer text-muted">
                         @{{ this.robot.state.charAt(0).toUpperCase() + this.robot.state.slice(1) }}
