@@ -33,11 +33,10 @@ return [
      * GPIO hardware environment setup
      */
     'pins' => [
-       'test' => [
-           'pin' => 16,
-           'mode' => 'write',
-           'defaultValue' => 0,
-       ],
+        'test' => [
+            'pin' => 16,
+            'mode' => 'pwm',
+        ],
     ],
 
 ];
