@@ -9,30 +9,19 @@ class RandyController extends Controller
 {
     public function setup(Request $request)
     {
-        Artisan::call('pin:mode', [
-            'pin' => config('randy.motorA.en'),
-            'mode' => 'pwm'
-        ]);
-        Artisan::call('pin:mode', [
-            'pin' => config('randy.motorA.in1'),
-            'mode' => 'output'
-        ]);
-        Artisan::call('pin:mode', [
-            'pin' => config('randy.motorA.in2'),
-            'mode' => 'output'
-        ]);
-        Artisan::call('pin:mode', [
-            'pin' => config('randy.motorB.en'),
-            'mode' => 'pwm'
-        ]);
-        Artisan::call('pin:mode', [
-            'pin' => config('randy.motorB.in1'),
-            'mode' => 'output'
-        ]);
-        Artisan::call('pin:mode', [
-            'pin' => config('randy.motorB.in2'),
-            'mode' => 'output'
-        ]);
+        // @todo error checking
+
+        // Set up Motor A
+        shell_exec('gpio mode '.config('randy.motorA.en').' pwm');
+        shell_exec('gpio mode '.config('randy.motorA.in1').' output');
+        shell_exec('gpio mode '.config('randy.motorA.in2').' output');
+
+        // Set up Motor B
+        shell_exec('gpio mode '.config('randy.motorB.en').' pwm');
+        shell_exec('gpio mode '.config('randy.motorB.in1').' output');
+        shell_exec('gpio mode '.config('randy.motorB.in2').' output');
+
+        // Return response
         return response()->json([
             'success' => true
         ], 200);
@@ -49,16 +38,8 @@ class RandyController extends Controller
         ]);
 
         // Set motors to 0 speed to perform update
-        Artisan::call('pin:value', [
-            'mode' => 'pwm',
-            'pin' => config('randy.motorA.en'),
-            'value' => 0,
-        ]);
-        Artisan::call('pin:value', [
-            'mode' => 'pwm',
-            'pin' => config('randy.motorB.en'),
-            'value' => 0
-        ]);
+        shell_exec('gpio pwm '.config('randy.motorA.en').' 0');
+        shell_exec('gpio pwm '.config('randy.motorB.en').' 0');
 
         // Get state and set speed
         if ($validated['state'] == 'stopped') {
@@ -72,60 +53,20 @@ class RandyController extends Controller
 
         // Set direction
         if ($validated['direction'] == 'forward') {
-            Artisan::call('pin:value', [
-                'mode' => 'digital',
-                'pin' => config('randy.motorA.in1'),
-                'value' => 0,
-            ]);
-            Artisan::call('pin:value', [
-                'mode' => 'digital',
-                'pin' => config('randy.motorA.in2'),
-                'value' => 1
-            ]);
-            Artisan::call('pin:value', [
-                'mode' => 'digital',
-                'pin' => config('randy.motorB.in1'),
-                'value' => 1,
-            ]);
-            Artisan::call('pin:value', [
-                'mode' => 'digital',
-                'pin' => config('randy.motorB.in2'),
-                'value' => 0
-            ]);
+            shell_exec('gpio write '.config('randy.motorA.in1').' 0');
+            shell_exec('gpio write '.config('randy.motorA.in2').' 1');
+            shell_exec('gpio write '.config('randy.motorB.in2').' 1');
+            shell_exec('gpio write '.config('randy.motorB.in2').' 0');
         } else {
-            Artisan::call('pin:value', [
-                'mode' => 'digital',
-                'pin' => config('randy.motorA.in1'),
-                'value' => 1,
-            ]);
-            Artisan::call('pin:value', [
-                'mode' => 'digital',
-                'pin' => config('randy.motorA.in2'),
-                'value' => 0
-            ]);
-            Artisan::call('pin:value', [
-                'mode' => 'digital',
-                'pin' => config('randy.motorB.in1'),
-                'value' => 0,
-            ]);
-            Artisan::call('pin:value', [
-                'mode' => 'digital',
-                'pin' => config('randy.motorB.in2'),
-                'value' => 1
-            ]);
+            shell_exec('gpio write '.config('randy.motorA.in1').' 1');
+            shell_exec('gpio write '.config('randy.motorA.in2').' 0');
+            shell_exec('gpio write '.config('randy.motorB.in2').' 0');
+            shell_exec('gpio write '.config('randy.motorB.in2').' 1');
         }
 
         // Set motors to speed
-        Artisan::call('pin:value', [
-            'mode' => 'pwm',
-            'pin' => config('randy.motorA.en'),
-            'value' => $speedPWM
-        ]);
-        Artisan::call('pin:value', [
-            'mode' => 'pwm',
-            'pin' => config('randy.motorB.en'),
-            'value' => $speedPWM
-        ]);
+        shell_exec('gpio pwm '.config('randy.motorA.en').' '.$speedPWM);
+        shell_exec('gpio pwm '.config('randy.motorB.en').' '.$speedPWM);
 
         return response()->json([
             'success' => true
