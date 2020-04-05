@@ -87,8 +87,8 @@ class RandyController extends Controller
         $speedPWM = (int) $speedPWM;
 
         // Set motors to speed
-        shell_exec('gpio pwm '.config('randy.motorA.en').' '.$speedPWM);
-        shell_exec('gpio pwm '.config('randy.motorB.en').' '.$speedPWM);
+        shell_exec('gpio pwm '.config('randy.motorA.en').' '.$leftSpeed);
+        shell_exec('gpio pwm '.config('randy.motorB.en').' '.$rightSpeed);
 
         return response()->json([
             'success' => true,
