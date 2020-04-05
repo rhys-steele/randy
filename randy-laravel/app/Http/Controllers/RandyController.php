@@ -54,12 +54,12 @@ class RandyController extends Controller
             if ($validated['direction'] == 'forward') {
                 shell_exec('gpio write '.config('randy.motorA.in1').' 0');
                 shell_exec('gpio write '.config('randy.motorA.in2').' 1');
-                shell_exec('gpio write '.config('randy.motorB.in2').' 1');
+                shell_exec('gpio write '.config('randy.motorB.in1').' 1');
                 shell_exec('gpio write '.config('randy.motorB.in2').' 0');
             } else {
                 shell_exec('gpio write '.config('randy.motorA.in1').' 1');
                 shell_exec('gpio write '.config('randy.motorA.in2').' 0');
-                shell_exec('gpio write '.config('randy.motorB.in2').' 0');
+                shell_exec('gpio write '.config('randy.motorB.in1').' 0');
                 shell_exec('gpio write '.config('randy.motorB.in2').' 1');
             }
         }
