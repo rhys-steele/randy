@@ -43,34 +43,30 @@ class RandyController extends Controller
             'speed' => 'numeric|min:0|max:100|required'
         ]);
 
-        // Set motors to 0 speed to perform update
-        shell_exec('gpio write '.config('randy.motorA.in1').' 0');
-        shell_exec('gpio write '.config('randy.motorA.in2').' 0');
-        shell_exec('gpio write '.config('randy.motorB.in2').' 0');
-        shell_exec('gpio write '.config('randy.motorB.in2').' 0');
-
         // Get state and set speed
         if ($validated['state'] == 'stopped') {
-            $speed = 0;
-            $speedPWM = 0;
-        } else {
-            $speed = $validated['speed'];
-            $speedPWM = (1023 / 100) * $speed;
-            $speedPWM = (int) $speedPWM;
-        }
-
-        // Set direction
-        if ($validated['direction'] == 'forward') {
             shell_exec('gpio write '.config('randy.motorA.in1').' 0');
-            shell_exec('gpio write '.config('randy.motorA.in2').' 1');
-            shell_exec('gpio write '.config('randy.motorB.in2').' 1');
-            shell_exec('gpio write '.config('randy.motorB.in2').' 0');
-        } else {
-            shell_exec('gpio write '.config('randy.motorA.in1').' 1');
             shell_exec('gpio write '.config('randy.motorA.in2').' 0');
             shell_exec('gpio write '.config('randy.motorB.in2').' 0');
-            shell_exec('gpio write '.config('randy.motorB.in2').' 1');
+            shell_exec('gpio write '.config('randy.motorB.in2').' 0');
+        } else {
+            // Set direction
+            if ($validated['direction'] == 'forward') {
+                shell_exec('gpio write '.config('randy.motorA.in1').' 0');
+                shell_exec('gpio write '.config('randy.motorA.in2').' 1');
+                shell_exec('gpio write '.config('randy.motorB.in2').' 1');
+                shell_exec('gpio write '.config('randy.motorB.in2').' 0');
+            } else {
+                shell_exec('gpio write '.config('randy.motorA.in1').' 1');
+                shell_exec('gpio write '.config('randy.motorA.in2').' 0');
+                shell_exec('gpio write '.config('randy.motorB.in2').' 0');
+                shell_exec('gpio write '.config('randy.motorB.in2').' 1');
+            }
         }
+
+        $speed = $validated['speed'];
+        $speedPWM = (1023 / 100) * $speed;
+        $speedPWM = (int) $speedPWM;
 
         // Set motors to speed
         shell_exec('gpio pwm '.config('randy.motorA.en').' '.$speedPWM);
