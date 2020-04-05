@@ -90,8 +90,10 @@ class RandyController extends Controller
         return response()->json([
             'success' => true,
             'data' => [
-                'leftSpeed' => $leftSpeed,
-                'rightSpeed' => $rightSpeed
+                'leftSpeed' => (int) $leftSpeed,
+                'rightSpeed' => (int) $rightSpeed,
+                'leftCommand' => 'gpio pwm '.config('randy.motorA.en').' '.(int) $leftSpeed,
+                'rightCommand' => 'gpio pwm '.config('randy.motorB.en').' '.(int) $rightSpeed
             ]
         ], 200);
     }
