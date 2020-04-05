@@ -42,6 +42,7 @@ class RandyController extends Controller
             'direction' => 'string|in:forward,backward|required',
             'speed' => 'numeric|min:0|max:100|required'
         ]);
+        $speed = $validated['speed'];
 
         // Get state and set speed
         if ($validated['state'] == 'stopped') {
@@ -82,13 +83,9 @@ class RandyController extends Controller
             $rightSpeed = (((1023 / 100) * $speed) / 100) * $percent;
         }
 
-        $speed = $validated['speed'];
-        $speedPWM = (1023 / 100) * $speed;
-        $speedPWM = (int) $speedPWM;
-
         // Set motors to speed
-        shell_exec('gpio pwm '.config('randy.motorA.en').' '.$leftSpeed);
-        shell_exec('gpio pwm '.config('randy.motorB.en').' '.$rightSpeed);
+        shell_exec('gpio pwm '.config('randy.motorA.en').' '.(int) $leftSpeed);
+        shell_exec('gpio pwm '.config('randy.motorB.en').' '.(int) $rightSpeed);
 
         return response()->json([
             'success' => true,
