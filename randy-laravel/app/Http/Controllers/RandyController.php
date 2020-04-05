@@ -93,7 +93,8 @@ class RandyController extends Controller
         return response()->json([
             'success' => true,
             'data' => [
-                'speed' => $speedPWM
+                'leftSpeed' => $leftSpeed,
+                'rightSpeed' => $rightSpeed
             ]
         ], 200);
     }
