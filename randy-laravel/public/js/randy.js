@@ -12,12 +12,10 @@ var app = new Vue({
     },
     methods: {
         go: function() {
-            console.log('Go');
             this.robot.state = 'running';
             this.update();
         },
         stop: function() {
-            console.log('Stop');
             this.robot.state = 'stopped';
             this.update();
         },

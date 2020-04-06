@@ -20,6 +20,12 @@ class RandyController extends Controller
         shell_exec('gpio mode '.config('randy.motorB.en').' pwm');
         shell_exec('gpio mode '.config('randy.motorB.in1').' output');
         shell_exec('gpio mode '.config('randy.motorB.in2').' output');
+        
+        // Set PWM settings
+        shell_exec('gpio pwm-ms');
+        shell_exec('gpio pwmc 1920');
+        shell_exec('gpio pwmr 200');
+
 
         // Stop motors
         shell_exec('gpio write '.config('randy.motorA.in1').' 0');
@@ -67,20 +73,20 @@ class RandyController extends Controller
 
         if ($validated['turning'] == 100) {
             // Straight
-            $leftSpeed = (((1023 / 100) * $speed) / 100) * 90;
-            $rightSpeed = (1023 / 100) * $speed;
+            $leftSpeed = (((200 / 100) * $speed) / 100) * 90;
+            $rightSpeed = (200 / 100) * $speed;
 
         } elseif ($validated['turning'] < 100) {
             // Turning left
             $percent = 100 - (int) $validated['turning'];
-            $leftSpeed = (((1023 / 100) * $speed) / 100) * $percent;
-            $rightSpeed = (1023 / 100) * $speed;
+            $leftSpeed = (((200 / 100) * $speed) / 100) * $percent;
+            $rightSpeed = (200 / 100) * $speed;
 
         } elseif ($validated['turning'] > 100) {
             // Turning right
             $percent = (int) $validated['turning'] - 100;
-            $leftSpeed = (1023 / 100) * $speed;
-            $rightSpeed = (((1023 / 100) * $speed) / 100) * $percent;
+            $leftSpeed = (200 / 100) * $speed;
+            $rightSpeed = (((200 / 100) * $speed) / 100) * $percent;
         }
 
         // Set motors to speed
