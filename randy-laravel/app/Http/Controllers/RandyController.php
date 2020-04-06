@@ -29,7 +29,7 @@ class RandyController extends Controller
         // Stop motors
         shell_exec('gpio write '.config('randy.motorA.in1').' 0');
         shell_exec('gpio write '.config('randy.motorA.in2').' 0');
-        shell_exec('gpio write '.config('randy.motorB.in2').' 0');
+        shell_exec('gpio write '.config('randy.motorB.in1').' 0');
         shell_exec('gpio write '.config('randy.motorB.in2').' 0');
 
         // Return response
@@ -53,7 +53,7 @@ class RandyController extends Controller
         if ($validated['state'] == 'stopped') {
             shell_exec('gpio write '.config('randy.motorA.in1').' 0');
             shell_exec('gpio write '.config('randy.motorA.in2').' 0');
-            shell_exec('gpio write '.config('randy.motorB.in2').' 0');
+            shell_exec('gpio write '.config('randy.motorB.in1').' 0');
             shell_exec('gpio write '.config('randy.motorB.in2').' 0');
         } else {
             // Set direction
