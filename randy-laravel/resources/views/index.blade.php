@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="speed-input">Speed: @{{ robot.speed / 2 }}%</label>
-                                    <input type="range" class="form-control-range range-input" max="200" id="speed-input" v-on:change="update" v-model="robot.speed">
+                                    <input type="range" class="form-control-range range-input" id="speed-input" v-on:change="update" v-model="robot.speed">
                                 </div>
                                 <button type="button" class="btn btn-success btn-lg btn-block" v-show="robot.state == 'stopped'" v-on:click="go">Go</button>
                                 <button type="button" class="btn btn-danger btn-lg btn-block" v-show="robot.state == 'running'" v-on:click="stop">Stop</button>
