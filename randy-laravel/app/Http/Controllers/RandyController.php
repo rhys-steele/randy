@@ -20,11 +20,6 @@ class RandyController extends Controller
         shell_exec('gpio mode '.config('randy.motorB.en').' pwm');
         shell_exec('gpio mode '.config('randy.motorB.in1').' output');
         shell_exec('gpio mode '.config('randy.motorB.in2').' output');
-        
-        // Set PWM settings
-        shell_exec('gpio pwm-bal');
-        shell_exec('gpio pwmc 500');
-        shell_exec('gpio pwmr 1023');
 
         // Stop motors
         shell_exec('gpio write '.config('randy.motorA.in1').' 0');
