@@ -40,7 +40,7 @@ class RandyController extends Controller
             'state' => 'string|in:running,stopped|required',
             'turning' => 'numeric|min:0|max:200|required',
             'direction' => 'string|in:forward,backward|required',
-            'speed' => 'numeric|min:0|max:100|required'
+            'speed' => 'numeric|min:30|max:150|required'
         ]);
         $speed = $validated['speed'];
 

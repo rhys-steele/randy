@@ -35,7 +35,7 @@ var app = new Vue({
             self.log('Sending command...');
             axios.post('/api/execute', {
                 state: this.robot.state,
-                speed: this.robot.speed * 30,
+                speed: (this.robot.speed - 1) * 30,
                 turning: this.robot.turning,
                 direction: this.robot.direction
             })
