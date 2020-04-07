@@ -25,7 +25,7 @@ var app = new Vue({
         },
         reset: function() {
             this.robot.turning = 100;
-            this.robot.speed = 50;
+            this.robot.speed = 5;
             this.robot.direction = 'forward';
             this.robot.state = 'stopped';
             this.logs = [];
