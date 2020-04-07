@@ -6,7 +6,7 @@ var app = new Vue({
             state: 'stopped',
             direction: 'forward',
             turning: 100,
-            speed: 50
+            speed: 4
         },
         logs: []
     },
@@ -35,7 +35,7 @@ var app = new Vue({
             self.log('Sending command...');
             axios.post('/api/execute', {
                 state: this.robot.state,
-                speed: this.robot.speed,
+                speed: this.robot.speed * 30,
                 turning: this.robot.turning,
                 direction: this.robot.direction
             })

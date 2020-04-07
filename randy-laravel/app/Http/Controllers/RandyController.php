@@ -67,20 +67,20 @@ class RandyController extends Controller
 
         if ($validated['turning'] == 100) {
             // Straight
-            $leftSpeed = (((1023 / 100) * $speed) / 100) * 90;
-            $rightSpeed = (1023 / 100) * $speed;
+            $leftSpeed = ((380 + $speed) / 100) * 90;
+            $rightSpeed = 380 + $speed;
 
         } elseif ($validated['turning'] < 100) {
             // Turning left
             $percent = 100 - (int) $validated['turning'];
-            $leftSpeed = (((1023 / 100) * $speed) / 100) * $percent;
-            $rightSpeed = (1023 / 100) * $speed;
+            $leftSpeed = ((380 + $speed) / 100) * $percent;
+            $rightSpeed = 380 + $speed;
 
         } elseif ($validated['turning'] > 100) {
             // Turning right
             $percent = (int) $validated['turning'] - 100;
-            $leftSpeed = (1023 / 100) * $speed;
-            $rightSpeed = (((1023 / 100) * $speed) / 100) * $percent;
+            $leftSpeed = 380 + $speed;
+            $rightSpeed = ((380 + $speed) / 100) * $percent;
         }
 
         // Set motors to speed
