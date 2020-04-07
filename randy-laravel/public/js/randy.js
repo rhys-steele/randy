@@ -6,7 +6,7 @@ var app = new Vue({
             state: 'stopped',
             direction: 'forward',
             turning: 100,
-            speed: 4
+            speed: 5
         },
         logs: []
     },
