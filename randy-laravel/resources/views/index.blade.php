@@ -27,6 +27,9 @@
                             </form>
                         </div>
                         <div v-if="started">
+                            <video src="rtp:192.168.0.25:8081/">
+                                Your browser does not support the VIDEO tag and/or RTP streams.
+                            </video>
                             <form>
                                 <div class="big-icon text-success" v-on:click="toggleDirection" v-show="robot.direction == 'forward'">
                                     <i class="fas fa-angle-double-up"></i>
