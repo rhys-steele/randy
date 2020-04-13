@@ -8,6 +8,10 @@ var app = new Vue({
             turning: 100,
             speed: 5
         },
+        webcam: {
+            x: 180,
+            y: 90
+        },
         logs: []
     },
     methods: {
@@ -57,6 +61,29 @@ var app = new Vue({
             .catch(function (error) {
                 self.log('Error during successful');
             });
+        },
+        moveWebcam: function(direction) {
+            var addX = 0;
+            var addY = 0;
+            switch (direction) {
+                case 'up':
+                    addY += this.webcam.y == 0 ? 0 : -15;
+                    break;
+                case 'down':
+                    addY += this.webcam.y == 180 ? 0 : 15;
+                    break;
+                case 'left':
+                    addX += this.webcam.x == 0 ? 0 : -15;
+                    break;
+                case 'right':
+                    addX += this.webcam.x == 180 ? 0 : 15;
+                    break;
+                default:
+                    break;
+            }
+            this.webcam.x += addX;
+            this.webcam.y += addY;
+            this.update();
         },
         log: function(message) {
             this.logs.push('[' + moment().format() + '] - ' + message);

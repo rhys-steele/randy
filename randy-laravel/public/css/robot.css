@@ -78,3 +78,35 @@ html, body {
     font-size: 100px;
     cursor: pointer;
 }
+
+.small-icon {
+    font-size: 70px;
+    cursor: pointer;
+}
+
+.webcam {
+    width: 324px;
+    height: 244px;
+}
+
+.webcam-down {
+    margin-top: -20px;
+}
+
+.webcam-left {
+    margin-left: 100px;
+}
+
+.webcam-right {
+    margin-right: 100px;
+}
+
+.webcam-up {
+    margin-bottom: -20px;
+}
+
+#degrees {
+    margin-top: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
