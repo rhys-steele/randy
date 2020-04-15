@@ -45,6 +45,10 @@ class Robot extends Model
         shell_exec('gpio mode ' . $this->motor_b_in_1_pin . ' output');
         shell_exec('gpio mode ' . $this->motor_b_in_2_pin . ' output');
 
+        // Set up Webcam
+        shell_exec('gpio mode ' . $this->webcam_x_pin . ' pwm');
+        shell_exec('gpio mode ' . $this->webcam_y_pin . ' pwm');
+
         // Stop motors
         shell_exec('gpio write ' . $this->motor_a_in_1_pin . ' 0');
         shell_exec('gpio write ' . $this->motor_a_in_2_pin . ' 0');
@@ -92,6 +96,7 @@ class Robot extends Model
             shell_exec('gpio write ' . $this->motor_b_in_1_pin . ' 0');
             shell_exec('gpio write ' . $this->motor_b_in_2_pin . ' 1');
         }
+        $this->state = 'started';
         $this->state_direction = $direction;
         $this->save();
     }
@@ -128,7 +133,6 @@ class Robot extends Model
         return [
             'state' => $this->state,
             'direction' => $this->state_direction,
-            'overall_speed' => $this->state_overall_speed,
             'left_speed' => $this->state_left_speed,
             'right_speed' => $this->state_right_speed,
             'webcam_x' => $this->state_webcam_x,
