@@ -9,7 +9,7 @@ var app = new Vue({
             speed: 5
         },
         webcam: {
-            x: 180,
+            x: 90,
             y: 90
         },
         logs: []
@@ -17,15 +17,15 @@ var app = new Vue({
     methods: {
         go: function() {
             this.robot.state = 'running';
-            this.update();
+            this.sync();
         },
         stop: function() {
             this.robot.state = 'stopped';
-            this.update();
+            this.sync();
         },
         toggleDirection: function() {
             this.robot.direction = this.robot.direction == 'forward' ? 'backward' : 'forward';
-            this.update();
+            this.sync();
         },
         reset: function() {
             this.robot.turning = 100;
@@ -34,20 +34,24 @@ var app = new Vue({
             this.robot.state = 'stopped';
             this.logs = [];
         },
-        update: function() {
+        sync: function() {
             var self = this;
-            self.log('Sending command...');
-            axios.post('/api/execute', {
+            self.log('Syncing...');
+            axios.post('/api/sync', {
                 state: this.robot.state,
                 speed: (this.robot.speed - 1) * 30,
                 turning: this.robot.turning,
-                direction: this.robot.direction
+                direction: this.robot.direction,
+                webcam: {
+                    x: this.webcam.x,
+                    y: this.webcam.y
+                }
             })
             .then(function (response) {
-                self.log('Command successfully sent');
+                self.log('Sync successful');
             })
             .catch(function (error) {
-                self.log('Command failed to send')
+                self.log('Sync failed')
             });
         },
         setup: function() {
@@ -59,7 +63,7 @@ var app = new Vue({
                 self.started = true;
             })
             .catch(function (error) {
-                self.log('Error during successful');
+                self.log('Setup failed');
             });
         },
         moveWebcam: function(direction) {
@@ -83,7 +87,7 @@ var app = new Vue({
             }
             this.webcam.x += addX;
             this.webcam.y += addY;
-            this.update();
+            this.sync();
         },
         log: function(message) {
             this.logs.push('[' + moment().format() + '] - ' + message);

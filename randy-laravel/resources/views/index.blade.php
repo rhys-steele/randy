@@ -15,7 +15,7 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            <div class="content" id="app">
+            <div class="content" id="app" >
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card text-center sub-title m-b-md">
@@ -23,7 +23,7 @@
                                 Robot
                             </div>
                             <div class="card-body">
-                                <div v-if="!started">
+                                <div v-if="!started" v-cloak>
                                     <form>
                                         <button type="button" class="btn btn-success btn-lg btn-block" v-on:click="setup">Setup</button>
                                     </form>
@@ -42,11 +42,11 @@
                                                 @{{ robot.turning < 100 ? 'Left' : 'Right' }}
                                                 @{{ robot.turning < 100 ? 100 - robot.turning : robot.turning - 100 }}%
                                             </label>
-                                            <input type="range" class="form-control-range range-input" max="200" value="100" id="direction-input" v-on:change="update" v-model="robot.turning">
+                                            <input type="range" class="form-control-range range-input" max="200" value="100" id="direction-input" v-on:change="sync" v-model="robot.turning">
                                         </div>
                                         <div class="form-group">
                                             <label for="speed-input">Speed: @{{ robot.speed }}</label>
-                                            <input type="range" class="form-control-range range-input" step="1" min="1" max="6" id="speed-input" v-on:change="update" v-model="robot.speed">
+                                            <input type="range" class="form-control-range range-input" step="1" min="1" max="6" id="speed-input" v-on:change="sync" v-model="robot.speed">
                                         </div>
                                         <button type="button" class="btn btn-success btn-lg btn-block" v-show="robot.state == 'stopped'" v-on:click="go">Go</button>
                                         <button type="button" class="btn btn-danger btn-lg btn-block" v-show="robot.state == 'running'" v-on:click="stop">Stop</button>

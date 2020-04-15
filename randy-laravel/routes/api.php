@@ -13,5 +13,5 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/execute', 'RobotController@execute');
+Route::post('/sync', 'RobotController@sync');
 Route::post('/setup', 'RobotController@setup');
