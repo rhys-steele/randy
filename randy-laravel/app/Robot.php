@@ -96,7 +96,7 @@ class Robot extends Model
             shell_exec('gpio write ' . $this->motor_b_in_1_pin . ' 0');
             shell_exec('gpio write ' . $this->motor_b_in_2_pin . ' 1');
         }
-        $this->state = 'started';
+        $this->state = 'running';
         $this->state_direction = $direction;
         $this->save();
     }
