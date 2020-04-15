@@ -25,8 +25,8 @@ class PopulateRobotsTable extends Migration
         $robot->motor_b_en_pin = 1;
         $robot->motor_b_in_1_pin = 21;
         $robot->motor_b_in_2_pin = 22;
-        $robot->webcam_x_pin = 1;
-        $robot->webcam_y_pin = 1;
+        $robot->webcam_x_pin = 23;
+        $robot->webcam_y_pin = 24;
         $robot->save();
     }
 

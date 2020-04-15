@@ -74,7 +74,7 @@
                             </div>
                             <div class="card-body">
                                 <div>
-                                    <iframe class="webcam" src="http://192.168.0.25:8081/"></iframe>
+                                    <iframe class="webcam" src="http://192.168.0.29:8081/"></iframe>
                                     <form>
                                         <div class="row">
                                             <div class="col-md-12">
